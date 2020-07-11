@@ -1,22 +1,28 @@
 <script>
-	import Nav from '../components/Nav.svelte';
-
-	export let segment;
+	// import Nav from '../components/Nav.svelte';
+	// export let segment;
+	let tabTitle = CodeUp
 </script>
 
+<svelte:head>
+	<title>{tabTitle}</title>
+</svelte:head>
+
+
+<Header title={mainTitle} />
+
+<main>
+	<slot></slot>
+</main>
 <style>
-	main {
+	/* main {
 		position: relative;
 		max-width: 56em;
 		background-color: white;
 		padding: 2em;
 		margin: 0 auto;
 		box-sizing: border-box;
-	}
+	} */
 </style>
 
-<Nav {segment}/>
-
-<main>
-	<slot></slot>
-</main>
+<!-- <Nav {segment}/> -->

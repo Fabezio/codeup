@@ -1,46 +1,58 @@
+<script>
+	// Modules
+	import codeups from './Codeups/codeup-store'
+	import Grid from './Codeups/Grid.svelte'
+	import Edit from './Codeups/Edit.svelte'
+	import Detail from './Codeups/Detail.svelte'
+	import Header from './UI/Header.svelte'
+	import Button from './UI/Button.svelte'
+	import Modal from './UI/Modal.svelte'
+	import Spinner from './UI/LoadingSpinner.svelte'
+	import Error from './UI/Error.svelte'
+
+	// Variables
+	export let mainTitle;
+	let tabTitle = 'Codeups main mage'
+	let editMode
+	let editedId
+	let page = 'overview'
+	const pageData = {}
+	let myUrl = 'https://codeups.firebaseio.com/codeups.json'
+	let isLoading = true
+	let error
+	// let codeups = codeups
+	// export let id
+
+</script>
+
+<main>
+	{#if page === 'overview'}
+		
+		{#if editMode === 'edit'}
+			<Edit 
+				{myUrl}
+				id={editedId} on:save={savedCodeup} on:cancel={cancelEdit} 
+			/>
+		{/if}
+		{#if isLoading}
+			<Spinner />
+		{:else}
+			<Grid 
+				on:showdetails={showDetails} 
+				codeups={$codeups} 
+				on:edit={startEdit}
+				on:add={() => editMode = 'edit'}
+			/>
+		{/if}
+	{:else }
+		<Detail id={pageData.id} 	on:close={closeDetails} />
+	{/if}
+	{#if error}
+		<Error message={error.message} on:cancel={cancelError} />
+	{/if}
+
+</main>
+
 <style>
-	h1, figure, p {
-		text-align: center;
-		margin: 0 auto;
-	}
-
-	h1 {
-		font-size: 2.8em;
-		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0 0 0.5em 0;
-	}
-
-	figure {
-		margin: 0 0 1em 0;
-	}
-
-	img {
-		width: 100%;
-		max-width: 400px;
-		margin: 0 0 1em 0;
-	}
-
-	p {
-		margin: 1em auto;
-	}
-
-	@media (min-width: 480px) {
-		h1 {
-			font-size: 4em;
-		}
-	}
+	
 </style>
-
-<svelte:head>
-	<title>Sapper project template</title>
-</svelte:head>
-
-<h1>Great success!</h1>
-
-<figure>
-	<img alt='Success Kid' src='successkid.jpg'>
-	<figcaption>Have fun with Sapper!</figcaption>
-</figure>
-
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>

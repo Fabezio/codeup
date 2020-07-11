@@ -1,15 +1,16 @@
 <script>
 	// import Nav from '../components/Nav.svelte';
 	// export let segment;
-	let tabTitle = CodeUp
+	import Header from '../components/UI/Header.svelte'
+	let mainTitle = CodeUp
 </script>
 
 <svelte:head>
-	<title>{tabTitle}</title>
+	<title>{mainTitle}</title>
 </svelte:head>
 
 
-<Header title={mainTitle} />
+<Header title="Welcome to {mainTitle}" />
 
 <main>
 	<slot></slot>

@@ -3,9 +3,9 @@
   import { fly, slide , scale} from 'svelte/transition'
   import { flip } from 'svelte/animate'
   
-  import Item from './Item.svelte'
-  import Filter from './Filter.svelte'
-  import Button from '../UI/Button.svelte'
+  import Item from '../components/Codeups/Item.svelte'
+  import Filter from '../components/Codeups/Filter.svelte'
+  import Button from '../components/UI/Button.svelte'
 
 
   const dispatch = createEventDispatcher()

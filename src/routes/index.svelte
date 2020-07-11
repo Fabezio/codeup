@@ -1,14 +1,14 @@
 <script>
 	// Modules
-	import codeups from './Codeups/codeup-store'
-	import Grid from './Codeups/Grid.svelte'
-	import Edit from './Codeups/Edit.svelte'
-	import Detail from './Codeups/Detail.svelte'
-	import Header from './UI/Header.svelte'
-	import Button from './UI/Button.svelte'
-	import Modal from './UI/Modal.svelte'
-	import Spinner from './UI/LoadingSpinner.svelte'
-	import Error from './UI/Error.svelte'
+	import codeups from '../codeup-store'
+	import Grid from './Grid.svelte'
+	import Detail from './Detail.svelte'
+	import Edit from '../components/Codeups/Edit.svelte'
+	import Header from '../components/UI/Header.svelte'
+	import Button from '../components/UI/Button.svelte'
+	import Modal from '../components/UI/Modal.svelte'
+	import Spinner from '../components/UI/LoadingSpinner.svelte'
+	import Error from '../components/UI/Error.svelte'
 
 	// Variables
 	export let mainTitle;

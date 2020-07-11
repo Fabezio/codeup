@@ -1,8 +1,8 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import codeups from './codeup-store'
+  import { isEmpty, isValidEmail } from '../../helpers/validation'
   
-  import { isEmpty, isValidEmail } from '../helpers/validation'
+  import codeups from '../../codeup-store'
   import TextInput from '../UI/TextInput.svelte'
   import Button from '../UI/Button.svelte'
   import Modal from '../UI/Modal.svelte'

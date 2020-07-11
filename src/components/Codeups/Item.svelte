@@ -1,7 +1,7 @@
 <script>
   import {createEventDispatcher} from 'svelte'
 
-  import codeups from './codeup-store'  
+  import codeups from '../../codeup-store'  
 
   import Button from '../UI/Button.svelte'
   import Badge from '../UI/Badge.svelte'

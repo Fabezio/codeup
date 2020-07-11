@@ -1,8 +1,8 @@
 <script>
   import { onDestroy, createEventDispatcher } from 'svelte'
 
-  import codeups from './codeup-store'
-  import Button from '../UI/Button.svelte'
+  import codeups from '../codeup-store'
+  import Button from '../components/UI/Button.svelte'
 
   export let id
 

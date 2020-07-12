@@ -78,13 +78,13 @@ label {
 .error-msg {
   color: red;
 }
-.valid {
+/* .valid {
   border-radius: 3px;
   border: 1.5px solid green;
 }
 .success-msg {
   color: green;
-}
+} */
 
 
 

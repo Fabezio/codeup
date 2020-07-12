@@ -1,10 +1,10 @@
 <style>
-  .loading {
+  /* .loading {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
-  }
+  } */
 
   
   .lds-dual-tiny-ring {

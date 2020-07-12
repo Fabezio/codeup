@@ -6,6 +6,13 @@ body {
 	color: #333;
 }
 
+:root {
+	--red: #fc0056;
+	--green: #01a129;
+	--blue: #01a1ff;
+	--rg: #FA5F2D;
+}
+
 h1, h2, h3, h4, h5, h6 {
 	margin: 0 0 0.5em 0;
 	font-weight: 400;

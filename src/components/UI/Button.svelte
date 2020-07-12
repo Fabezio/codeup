@@ -1,38 +1,23 @@
 <script>
-  // export let captio÷n
-  export let mode = null
-  export let color = null
-  export let type = null
-  export let href = null
-  export let disabled = false
+  export let type = "button";
+  export let href = null;
+  export let mode = null;
+  export let color = null;
+  export let disabled = false;
 </script>
-
-{#if href} 
-<a href={href} type={type}>
-  <slot />
-</a>
-{:else}
-<button class="{mode} {color}" {disabled} type={type} on:click>
-  <slot />
-</button>
-{/if}
 
 <style>
   button,
   a {
     font: inherit;
-    border: 1px solid var(--red);
-    background: var(--red);
+    border: 1px solid #cf0056;
+    background: #cf0056;
     padding: 0.5rem 1rem;
     color: white;
     border-radius: 5px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.26);
     cursor: pointer;
     text-decoration: none;
-    font-variant: small-caps;
-    min-width: 8rem;
-    height: 2.5rem;
-    /* text-transform: uppercase; */
   }
 
   button:focus {
@@ -71,7 +56,7 @@
 
   .outline {
     background: transparent;
-    color: var(--red);
+    color: #cf0056;
     box-shadow: none;
   }
 
@@ -97,5 +82,14 @@
   .outline.success:active {
     background: #c2ffd1;
   }
-
 </style>
+
+{#if href}
+  <a {href}>
+    <slot />
+  </a>
+{:else}
+  <button class="{mode} {color}" {type} on:click {disabled}>
+    <slot />
+  </button>
+{/if}

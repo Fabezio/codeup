@@ -1,21 +1,21 @@
 <script>
-  import {slide} from 'svelte/transition'
+  import { slide } from "svelte/transition";
 </script>
 
-<span transition:slide={{duration: 200}} id="fav">
-  <slot />
-</span>
-
 <style>
-  #fav {
-    margin-left: .5rem;
-    padding: .25rem 0.5rem;
-    border-radius: 5px;
-    background: var(--red);
+  span {
+    display: inline-block;
+    margin: 0 0.25rem;
+    border-radius: 3px;
+    border: 1px solid #cf0056;
+    background: #cf0056;
     color: white;
-    font-size: 0.9rem;
-    font-weight: 400;
-    text-transform: uppercase;
-    /* text-shadow: 0.5px 0.5px 2px #30ffa9; */
+    padding: 0 0.5rem;
+    font-family: "Lato", sans-serif;
+    font-size: 0.8rem;
   }
 </style>
+
+<span transition:slide>
+  <slot />
+</span>

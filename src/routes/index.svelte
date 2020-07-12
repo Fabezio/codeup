@@ -1,8 +1,9 @@
 <script>
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { createEventDispatcher, onMount, onDestroy } from 'svelte'
   import { fly, slide , scale} from 'svelte/transition'
   import { flip } from 'svelte/animate'
   
+  import codeups from '../codeup-store'
   import Item from '../components/Codeups/Item.svelte'
   import Edit from '../components/Codeups/Edit.svelte'
   import Filter from '../components/Codeups/Filter.svelte'
@@ -13,14 +14,19 @@
 
   const dispatch = createEventDispatcher()
   let myUrl = 'https://codeups.firebaseio.com/codeups.json'
-  let codeups = []
+  let fetchedCodeups = []
   let editMode
 	let editedId
   let isLoading
   let favsOnly = false
+  let unsubscribe
   // let filteredCodeups
 
   onMount(() => {
+    unsubscribe = codeups.subscribe(items => {
+      fetchedCodeups = items
+    })
+    isLoading = true
     fetch(myUrl)
     .then( res => {
       if(!res.ok) throw new Error('Oops, Couldn\'t fetch data, please come back later...')
@@ -38,7 +44,7 @@
           isLoading = false
           codeups.setCodeups(loadedCodeups.reverse())
           // codeups.setCodeups([])
-        }, 100 )
+        }, 750 )
       }
     })
     .catch( err => {
@@ -47,10 +53,14 @@
       console.log(err)
     })
   })
+
+  onDestroy(() => {
+    if (unsubscribe) unsubscribe()
+  })
   
 
 
-  $: filteredCodeups = favsOnly ? codeups.filter(m => m.isFavorite) : codeups ;
+  $: filteredCodeups = favsOnly ? fetchedCodeups.filter(m => m.isFavorite) : fetchedCodeups ;
   // $:  console.log (codeups.isFavorite)
       
   function setFilter(event) {
@@ -69,9 +79,12 @@
 	function startEdit (event) {
 		editMode = 'edit'
 		editedId = event.detail
-	}	
+  }	
+  
+  // $: console.log(codeups)
 	
 </script>
+
 <svelte:head>
   <title>All Codeups</title>
 </svelte:head>

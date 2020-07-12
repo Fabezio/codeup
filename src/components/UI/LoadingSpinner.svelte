@@ -32,9 +32,9 @@
     transform: rotate(360deg);
   }
 }
-  .lds-dual-tiny-ring {
+  /* .lds-dual-tiny-ring {
   position: relative;
-  top: 20px;
+  top: 22px;
   left: 19px;
   display: inline-block;
   width: 40px;
@@ -50,7 +50,7 @@
   border: 4px solid var(--red);
   border-color: var(--red) transparent var(--red) transparent;
   animation: lds-dual-tiny-ring 0.8s linear infinite;
-}
+} */
 
 @keyframes lds-dual-tiny-ring {
   0% {
@@ -78,7 +78,7 @@
 
 <div class="loading">
   <div class="lds-dual-ring">
-    <div class="lds-dual-tiny-ring" />
+    <!-- <div class="lds-dual-tiny-ring" /> -->
     <div />
     <div />
     <div />

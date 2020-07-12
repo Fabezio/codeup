@@ -1,5 +1,5 @@
 <script>
-  import {createEventDispatcher} from 'svelte'
+  import {createEventDispatcher, onMount} from 'svelte'
 
   import codeups from '../../codeup-store'  
 
@@ -13,7 +13,7 @@
   export let imageUrl
   export let description
   export let address
-  // export let email
+  export let email
   export let isFavorite
   
   let isLoading = false
@@ -22,29 +22,32 @@
 
   function toggleFavorite() {
     isLoading = true
-    fetch(`https://codeups.firebaseio.com/codeups/${id}.json`, {
-        method: 'PATCH',
-        body: JSON.stringify({isFavorite: !isFavorite}),
-        headers: {
-          'Content-Type': 'application/json'
-       }
-      })
-      .then( res => {
-        // isLoading = false
-        if(!res.ok) throw new Error('Oops! Please try again.')
-        console.log(`data ${id} favorite option updated`)
-        	setTimeout(() => {
-				isLoading = false
-				// codeups.setCodeups(loadedCodeups.reverse())
-        codeups.toggleFavorite(id)
-				// codeups.setCodeups([])
-			}, 500 )
-        // codeups.updateCodeup(id, codeupData)
-      })
-      .catch ( err =>  {
-          loading = false
-          console.log(err)
+    onMount(()=> {
+
+      fetch(`https://codeups.firebaseio.com/codeups/${id}.json`, {
+          method: 'PATCH',
+          body: JSON.stringify({isFavorite: !isFavorite}),
+          headers: {
+            'Content-Type': 'application/json'
+         }
         })
+        .then( res => {
+          // isLoading = false
+          if(!res.ok) throw new Error('Oops! Please try again.')
+          console.log(`data ${id} favorite option updated`)
+            setTimeout(() => {
+          isLoading = false
+          // codeups.setCodeups(loadedCodeups.reverse())
+          codeups.toggleFavorite(id)
+          // codeups.setCodeups([])
+        }, 500 )
+          // codeups.updateCodeup(id, codeupData)
+        })
+        .catch ( err =>  {
+            loading = false
+            console.log(err)
+          })
+    })
   }
 
   function descLengthHandle() {
@@ -60,7 +63,7 @@
       words.length = nb
       description = words.join(' ') + ' ...'}
 
-      console.log(words.length)
+      // console.log(words.length)
     }
 
 </script>

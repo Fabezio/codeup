@@ -3,7 +3,7 @@
 
   const dispatch = createEventDispatcher()
   let selectedButton = 0
-  $: console.log(selectedButton)
+  // $: console.log(selectedButton)
 </script>
 
 <div>

@@ -31,7 +31,7 @@
 <style>
   .image {
     width: 100%;
-    height: 600px;
+    height: 100%;
     background: #e7e7e7;
   }
 
@@ -58,6 +58,9 @@
     font-size: 1.5rem;
   }
 </style>
+<svelte:head>
+  <title>meetup {loadedMeetup.id}</title>
+</svelte:head>
 
 <section>
   <div class="image">

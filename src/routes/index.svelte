@@ -1,6 +1,6 @@
 <script context="module">
   export function preload(page) {
-    return this.fetch("https://meetups-4c17d.firebaseio.com/codeups.json")
+    return this.fetch("https://meetups-4c17d.firebaseio.com/meetups.json")
       .then(res => {
         if (!res.ok) {
           throw new Error("Fetching meetups failed, please try again later!");
@@ -46,18 +46,23 @@
   let editMode;
   let editedId;
   let isLoading;
+  let loadedMeetups = []
+  let unsubscribe
 
   const dispatch = createEventDispatcher();
 
   let favsOnly = false;
 
   $: filteredMeetups = favsOnly
-    ? fetchedMeetups.filter(m => m.isFavorite)
-    : fetchedMeetups;
+    ? loadedMeetups.filter(m => m.isFavorite)
+    : loadedMeetups;
 
   onMount(() => {
     meetups.setMeetups(fetchedMeetups);
+    unsubscribe = meetups.subscribe(items => loadedMeetups = items)
   });
+
+  onDestroy(() => {if (unsubscribe) unsubscribe()})
 
   function setFilter(event) {
     favsOnly = event.detail === 1;
@@ -76,6 +81,10 @@
   function startEdit(event) {
     editMode = "edit";
     editedId = event.detail;
+  }
+
+  function startAdd () {
+    editMode = "edit"
   }
 </script>
 
@@ -116,7 +125,7 @@
 {:else}
   <section id="meetup-controls">
     <MeetupFilter on:select={setFilter} />
-    <Button on:click={() => dispatch('add')}>New Meetup</Button>
+    <Button on:click={startAdd}>New Meetup</Button>
   </section>
   {#if filteredMeetups.length === 0}
     <p id="no-meetups">No meetups found, you can start adding some.</p>
@@ -124,7 +133,7 @@
   <section id="meetups">
     {#each filteredMeetups as meetup (meetup.id)}
       <div transition:scale animate:flip={{ duration: 300 }}>
-        <MeetupItem id={meetup.id} title={meetup.title} subtitle={meetup.subtitle} description={meetup.description} imageUrl={meetup.imageUrl} email={meetup.contactEmail} address={meetup.address} isFav={meetup.isFavorite} on:showdetails on:edit />
+        <MeetupItem id={meetup.id} title={meetup.title} subtitle={meetup.subtitle} description={meetup.description} imageUrl={meetup.imageUrl} email={meetup.contactEmail} address={meetup.address} isFav={meetup.isFavorite} on:edit={startEdit} />
       </div>
     {/each}
   </section>
